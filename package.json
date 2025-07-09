@@ -1,71 +1,65 @@
 {
-  "name": "@jridgewell/trace-mapping",
-  "version": "0.3.29",
-  "description": "Trace the original position through a source map",
-  "keywords": [
-    "source",
-    "map"
-  ],
-  "main": "dist/trace-mapping.umd.js",
-  "module": "dist/trace-mapping.mjs",
-  "types": "types/trace-mapping.d.cts",
-  "files": [
-    "dist",
-    "src",
-    "types"
-  ],
+  "name": "tinyglobby",
+  "version": "0.2.14",
+  "description": "A fast and minimal alternative to globby and fast-glob",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": [
-      {
-        "import": {
-          "types": "./types/trace-mapping.d.mts",
-          "default": "./dist/trace-mapping.mjs"
-        },
-        "require": {
-          "types": "./types/trace-mapping.d.cts",
-          "default": "./dist/trace-mapping.umd.js"
-        },
-        "browser": {
-          "types": "./types/trace-mapping.d.cts",
-          "default": "./dist/trace-mapping.umd.js"
-        }
-      },
-      "./dist/trace-mapping.umd.js"
-    ],
-    "./package.json": "./package.json"
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
-  "scripts": {
-    "benchmark": "run-s build:code benchmark:*",
-    "benchmark:install": "cd benchmark && npm install",
-    "benchmark:only": "node --expose-gc benchmark/index.js",
-    "build": "run-s -n build:code build:types",
-    "build:code": "node ../../esbuild.mjs trace-mapping.ts",
-    "build:types": "run-s build:types:force build:types:emit build:types:mts",
-    "build:types:force": "rimraf tsconfig.build.tsbuildinfo",
-    "build:types:emit": "tsc --project tsconfig.build.json",
-    "build:types:mts": "node ../../mts-types.mjs",
-    "clean": "run-s -n clean:code clean:types",
-    "clean:code": "tsc --build --clean tsconfig.build.json",
-    "clean:types": "rimraf dist types",
-    "test": "run-s -n test:types test:only test:format",
-    "test:format": "prettier --check '{src,test}/**/*.ts'",
-    "test:only": "mocha",
-    "test:types": "eslint '{src,test}/**/*.ts'",
-    "lint": "run-s -n lint:types lint:format",
-    "lint:format": "npm run test:format -- --write",
-    "lint:types": "npm run test:types -- --fix",
-    "prepublishOnly": "npm run-s -n build test"
-  },
-  "homepage": "https://github.com/jridgewell/sourcemaps/tree/main/packages/trace-mapping",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "author": "Superchupu",
+  "license": "MIT",
+  "keywords": [
+    "glob",
+    "patterns",
+    "fast",
+    "implementation"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jridgewell/sourcemaps.git",
-    "directory": "packages/trace-mapping"
+    "url": "git+https://github.com/SuperchupuDev/tinyglobby.git"
   },
-  "author": "Justin Ridgewell <justin@ridgewell.name>",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SuperchupuDev/tinyglobby/issues"
+  },
+  "homepage": "https://github.com/SuperchupuDev/tinyglobby#readme",
+  "funding": {
+    "url": "https://github.com/sponsors/SuperchupuDev"
+  },
   "dependencies": {
-    "@jridgewell/resolve-uri": "^3.1.0",
-    "@jridgewell/sourcemap-codec": "^1.4.14"
+    "fdir": "^6.4.4",
+    "picomatch": "^4.0.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.15.21",
+    "@types/picomatch": "^4.0.0",
+    "fs-fixture": "^2.7.1",
+    "tsdown": "^0.12.3",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsdown",
+    "check": "biome check",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "lint:fix": "biome lint --fix --unsafe",
+    "test": "node --experimental-transform-types --test",
+    "test:coverage": "node --experimental-transform-types --test --experimental-test-coverage",
+    "test:only": "node --experimental-transform-types --test --test-only",
+    "typecheck": "tsc --noEmit"
   }
 }
