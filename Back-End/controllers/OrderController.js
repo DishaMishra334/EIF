@@ -4,17 +4,12 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import productModel from '../models/productModel.js';
 import Stripe from 'stripe';
-import Razorpay from 'razorpay'; // ⭐ NEW: Import Razorpay
+
 
 // Initialize Stripe with your secret key
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// ⭐ NEW: Initialize Razorpay with your Key ID and Key Secret
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
-
+// ⭐ NEW: Initialize Razorpay with your Key ID and Key Secre
 
 // Place an order for a user
 const placeOrder = async (req, res) => {
