@@ -1,7 +1,7 @@
 // backend/models/productModel.js
 import mongoose from 'mongoose';
 
-// Define the schema for a single product variant
+
 const variantSchema = new mongoose.Schema({
     size: {
         type: String,
@@ -17,7 +17,7 @@ const variantSchema = new mongoose.Schema({
     },
 });
 
-// Define the main product schema
+
 const productSchema = new mongoose.Schema({
     name: { 
         type: String,
@@ -31,12 +31,12 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // The image field is now an array of strings to store multiple URLs
+    
     image: {
-        type: [String],
-        default: [], // Default to an empty array
+        type: Array,
+        required: true, 
     },
-    // The variants field is an array of variantSchema objects
+    
     variants: {
         type: [variantSchema],
         required: true,
@@ -51,7 +51,8 @@ const productSchema = new mongoose.Schema({
     }
 });
 
-// Create the Product model from the schema
+
 const productModel = mongoose.model('product', productSchema);
 
 export default productModel;
+
