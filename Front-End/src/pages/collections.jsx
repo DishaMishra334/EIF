@@ -1,9 +1,8 @@
-// pages/collections.jsx
 import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../Context/ShopContext';
-import { assets } from '../assets/assets'; // Ensure this path is correct
-import Title from '../Componet/Title'; // Ensure this path is correct
-import Productitem from '../Componet/Productitem'; // Ensure this path is correct
+import { assets } from '../assets/assets';
+import Title from '../Componet/Title';
+import Productitem from '../Componet/Productitem';
 
 const Collections = () => {
   const { products, serach, showSerach } = useContext(ShopContext);
@@ -95,7 +94,7 @@ const Collections = () => {
           FILTER
           <img
             className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`}
-            src={assets.dropdown_icon} // Ensure assets.dropdown_icon is correctly defined
+            src={assets.dropdown_icon}
             alt="Dropdown Icon"
           />
         </p>
@@ -106,19 +105,19 @@ const Collections = () => {
               <input
                 className='w-3 h-3 text-blue-600 rounded border-gray-300 focus:ring-blue-500'
                 type="checkbox"
-                value={'vegetables'}
+                value={'Vegetables'}
                 onChange={toggleCategory}
-                checked={selectedCategories.includes('vegetables')}
+                checked={selectedCategories.includes('Vegetables')}
               />
-              vegetables
+              Vegetables
             </label>
             <label className='flex gap-2 items-center'>
               <input
                 className='w-3 h-3 text-blue-600 rounded border-gray-300 focus:ring-blue-500'
                 type="checkbox"
-                value={'fruit'} // Ensure this matches your category name in product data
+                value={'Fruits'} // ⭐ CORRECTED HERE
                 onChange={toggleCategory}
-                checked={selectedCategories.includes('fruit')}
+                checked={selectedCategories.includes('Fruits')} // ⭐ AND HERE
               />
               fruits
             </label>
@@ -143,10 +142,9 @@ const Collections = () => {
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
           {filterProducts.length > 0 ? (
             filterProducts.map((item, index) => (
-              // ⭐ IMPORTANT CHANGE: Pass the entire 'item' (product) object as 'product' prop
               <Productitem
-                key={item._id || index} // Use _id for key if available, fallback to index
-                product={item} // ⭐ PASS THE WHOLE PRODUCT OBJECT HERE ⭐
+                key={item._id || index}
+                product={item}
               />
             ))
           ) : (
