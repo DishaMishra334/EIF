@@ -1,9 +1,5 @@
-// backend/controllers/productController.js
-
 import { v2 as cloudinary } from 'cloudinary';
 import productModel from '../models/productModel.js';
-
-// Configuration for Cloudinary is assumed to be done elsewhere in the app.
 
 const addProduct = async (req, res) => {
     console.log("Incoming req.files:", req.files);
@@ -56,8 +52,7 @@ const addProduct = async (req, res) => {
             };
         });
 
-        // ⭐ THIS SECTION CORRECTLY HANDLES THE CLOUDINARY UPLOAD
-        // It takes the temporary file path from multer and sends it to Cloudinary
+        // handle file upload
         const filesToUpload = Object.values(req.files).flat();
         console.log("Files found for upload:", filesToUpload);
 
@@ -87,7 +82,8 @@ const addProduct = async (req, res) => {
             category,
             variants: validatedVariants,
             bestseller: bestseller === "true",
-            image: imagesURL, // This field is correctly set as an array of URLs
+            // Corrected and more robust image assignment
+            image: imagesURL.length > 0 ? imagesURL : ['https://via.placeholder.com/300x200.png?text=No+Image+Available'], 
             date: Date.now()
         };
 
