@@ -8,7 +8,7 @@ import userRoutes from './Routes/userRoutes.js';
 import productRoutes from './Routes/productRoutes.js';
 import orderRoutes from './Routes/orderRoutes.js';
 import cartRoutes from './Routes/cartRoutes.js';
-import { v2 as cloudinary } from 'cloudinary'; // ⭐ IMPORTANT: Import Cloudinary here
+import { v2 as cloudinary } from 'cloudinary';
 
 // app config
 const app = express();
@@ -21,11 +21,12 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-// ⭐ Cloudinary Configuration - THIS IS THE MISSING PIECE!
+// ⭐ Cloudinary Configuration
 // It must be placed here to configure Cloudinary before routes use it.
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME, // Make sure this matches your .env variable name
-    api_secret: process.env.CLOUDINARY_SECRET_KEY // Make sure this matches your .env variable name
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY, // ⭐ ADD THIS LINE
+    api_secret: process.env.CLOUDINARY_SECRET_KEY
 });
 
 // API Endpoints
